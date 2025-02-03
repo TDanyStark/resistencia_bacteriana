@@ -1,0 +1,22 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../sections/Header.astro";
+import Brands from "@/sections/Brands.astro";
+import AbbottConBackground from "@/components/AbbottConBackground.astro";
+import Banner from "@/sections/Banner.astro";
+import GamePoder from "@/components/GamePoder";
+import Reference from "@/components/Reference.astro";
+---
+
+<Layout title="Resistencia Bacteriana">
+  <Header />
+  <main>
+    <Banner />
+    <Brands align="justify-start" />
+    <GamePoder client:load />
+    <Reference/>
+  </main>
+  <footer>
+    <AbbottConBackground />
+  </footer>
+</Layout>

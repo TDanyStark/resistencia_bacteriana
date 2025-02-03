@@ -1,0 +1,21 @@
+---
+import { URL_BASE } from "@/config";
+import Title from "@/components/Title.astro";
+---
+
+<section>
+  <div class="max-w-7xl mx-auto font-brandon">
+    <div class="relative overflow-clip">
+      <img src={`${URL_BASE}/img/hero.webp`} class="h-180 object-cover object-center lg:h-auto" alt="" />
+      <div class="absolute inset-0 w-full h-full flex flex-col justify-end items-start p-4 md:p-10 gap-6">
+        <Title size={1} />
+        <a
+          href=`${URL_BASE}/game/`
+          class="text-azul-verdoso-abbott text-2xl md:text-4xl inline-block px-6 py-3 bg-amarillo-abbott rounded-full text-center font-light"
+        >
+          <span class="font-bold">HAZ CLIC AQUÍ</span> PARA EMPEZAR
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
