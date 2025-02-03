@@ -5,21 +5,40 @@ interface Props{
 
 const {size} = Astro.props;
 
-const firstPartMobile = `text-${Math.round(size*4)}xl`;
-const firstPartDesktop = `text-${Math.round(size*5)}xl`;
+const firstPartMobile = `${Math.round(size*2)}rem`;
+const firstPartDesktop = `${Math.round(size*3)}rem`;
 
-const secondPartMobile = `text-${Math.round(size*5)}xl`;
-const secondPartDesktop = `text-${Math.round(size*6)}xl`;
+const secondPartMobile = `${Math.round(size*3)}rem`;
+const secondPartDesktop = `${Math.round(size*4)}rem`;
 ---
 
-<h1 class=`text-white ${firstPartMobile} lg:${firstPartDesktop} font-light `>
+<h1 class=`text-white font-light first-part`>
   ES HORA DE 
   <span class="block">
     HACERLE FRENTE A LA
   </span> 
   <span
-    class=`${secondPartMobile} lg:${secondPartDesktop} font-bold block`>
+    class=`font-bold block second-part`>
     RESISTENCIA BACTERIANA
   </span>
-  
 </h1>
+
+<style define:vars={{ firstPartMobile, firstPartDesktop, secondPartMobile, secondPartDesktop }}>
+  .first-part{
+    font-size: var(--firstPartMobile);
+    line-height: 1.2;
+  }
+
+  .second-part{
+    font-size: var(--secondPartMobile);
+  }
+  @media (width >= 1024px) {
+    .first-part{
+      font-size: var(--firstPartDesktop);
+    }
+
+    .second-part{
+      font-size: var(--secondPartDesktop);
+    }
+  }
+</style>

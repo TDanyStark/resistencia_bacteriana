@@ -1,4 +1,4 @@
-import { questionnaire } from "../data/data";
+import { questionnaire, type EnhancedQuestion } from "../data/data";
 import { useEffect, useState } from "react";
 import "./GamePoder.css";
 import Modal from "./Modal";
@@ -8,7 +8,16 @@ import QuestionArticle from "./Question";
 
 
 const GamePoder = () => {
-  const [questions, setQuestions] = useState(questionnaire);
+  const [questions, setQuestions] = useState<EnhancedQuestion[]>(() => {
+    return questionnaire.map((question) => {
+      return {
+        ...question,
+        isActive: false,
+        isAnswered: false,
+        userSelected: null,
+      };
+    });
+  });
   const [title, setTitle] = useState("");
   const [message, setMessage] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -112,7 +121,7 @@ const GamePoder = () => {
 
   return (
     <>
-      <section className="max-w-7xl mx-auto px-4 pb-4 md:px-8 md:pb-8 font-brandon">
+      <section className="max-w-7xl mx-auto px-4 pb-4 md:pb-8 font-brandon">
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-8">
           {questions.map((question) => (
             <QuestionArticle 

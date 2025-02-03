@@ -3,70 +3,53 @@ export interface Question {
   question: string;
   reference: string;
   correctAnswer: boolean;
+}
+
+export interface EnhancedQuestion extends Question {
   isActive: boolean;
   isAnswered: boolean;
   userSelected: boolean | null;
-}
+} 
 
 export const questionnaire: Question[] = [
   {
     id: "1",
     question:
-      "Los anticonceptivos orales combinados contienen dos tipos de hormonas llamadas estrógenos y progestágenos",
+      "Los antibióticos sirven para tratar virus como la gripa",
     reference: "1",
-    correctAnswer: true,
-    isActive: false,
-    isAnswered: false,
-    userSelected: null,
+    correctAnswer: false,
+  
   },
   {
     id: "2",
     question:
-      "Todas las mujeres deben tomarse un descanso después de usar anticonceptivos orales combinados durante cierto tiempo",
+      "Aumentar la dosis del antibiótico no ayuda a mejorar más rápido, por el contrario, pone en riesgo la salud debido a que se incrementa el riesgo de efectos secundarios.",
     reference: "1",
-    correctAnswer: false,
-    isActive: false,
-    isAnswered: false,
-    userSelected: null,
+    correctAnswer: true,
+   
   },
   {
     id: "3",
     question:
-      "Los anticonceptivos orales combinados hacen que las mujeres aumenten de peso",
+      "Un antibiótico recetado por el médico puede cambiarse por otro similar",
     reference: "1",
     correctAnswer: false,
-    isActive: false,
-    isAnswered: false,
-    userSelected: null,
+    
   },
   {
     id: "4",
     question:
-      "El uso de un anticonceptivo oral combinado puede ayudar a mejorar los síntomas emocionales relacionados con el ciclo menstrual",
+      "Los pacientes pueden suspender el tratamiento antibiótico cuando sientan que los síntomas han mejorado",
       reference: "2",
-    correctAnswer: true,
-    isActive: false,
-    isAnswered: false,
-    userSelected: null,
+    correctAnswer: false,
+   
   },
   {
     id: "5",
     question:
-      "Algunos anticonceptivos orales combinados se utilizan como tratamiento del acné",
-    reference: "3",
+      "La resistencia bacteriana es una amenaza de salud pública a nivel mundial",
+    reference: "2",
     correctAnswer: true,
-    isActive: false,
-    isAnswered: false,
-    userSelected: null,
-  },
-  {
-    id: "6",
-    question:
-      "Las mujeres mayores de 35 años no pueden usar anticonceptivos orales combinados",
-    reference: "1",
-    correctAnswer: false,
-    isActive: false,
-    isAnswered: false,
-    userSelected: null,
-  },
+
+  }
 ];
