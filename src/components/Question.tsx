@@ -42,12 +42,12 @@ const QuestionArticle = ({ question, handleClickArticle, handleresponse, seconds
           </h3>
         </div>
         <div className="options text-3xl space-x-4">
-          <button className="bg-amarillo-abbott text-azul-verdoso-abbott px-4 py-2 rounded-full relative"
+          <button className="bg-amarillo-abbott text-azul-verdoso-abbott px-4 py-2 rounded-full relative cursor-pointer"
             onClick={(e) => handleresponse(e, question.id, true)}
           >
             Verdadero
           </button>
-          <button className="bg-white text-azul-verdoso-abbott px-4 py-2 rounded-full relative"
+          <button className="bg-white text-azul-verdoso-abbott px-4 py-2 rounded-full relative cursor-pointer"
             onClick={(e) => handleresponse(e, question.id, false)}
           >
             Falso
