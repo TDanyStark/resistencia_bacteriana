@@ -5,6 +5,7 @@ import Modal from "./Modal";
 import useAudios from "@/hooks/useAudios";
 import executeAudio from "@/utils/executeAudio";
 import QuestionArticle from "./Question";
+import confetti from "canvas-confetti";
 
 
 const GamePoder = () => {
@@ -22,7 +23,7 @@ const GamePoder = () => {
   const [message, setMessage] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [seconds, setSeconds] = useState<number | null>(null);
-  const { tictacAudio, successAudio, errorAudio } = useAudios();
+  const { tictacAudio, successAudio, errorAudio, successEndAudio, confettiAudio } = useAudios();
 
   const handleClickArticle = (e: React.MouseEvent<HTMLElement>, id: string) => {
     e.stopPropagation();
@@ -47,6 +48,15 @@ const GamePoder = () => {
     setQuestions(updatedQuestions);
   };
 
+  const LaunchModalAndAudio = (title: string, message: string, audio: HTMLAudioElement | null) => {
+    setTitle(title);
+    setMessage(message);
+    setIsModalOpen(true);
+    setSeconds(null);    
+    tictacAudio?.pause();
+    executeAudio(audio);
+  }
+
   const handleresponse = (e: React.MouseEvent<HTMLButtonElement>, id: string, response: boolean) => {
     // prevenir el click en los padres
     e.stopPropagation();
@@ -66,21 +76,42 @@ const GamePoder = () => {
     const question = updatedQuestions.find((question) => question.id === id);
     if (question) {
       if (question.correctAnswer === response) {
-        setTitle("¡Correcto! ¡Has acertado!");
-        setMessage("🎉");
-        setSeconds(null);
-        tictacAudio?.pause();
-        executeAudio(successAudio);
+        const isAllAnswered = updatedQuestions.every((question) => question.isAnswered);
+        if (isAllAnswered) return;
+        LaunchModalAndAudio("¡Correcto! ¡Has acertado!", "☺️", successAudio);
       } else {
-        setTitle("¡Incorrecto! ¡Inténtalo de nuevo!");
-        setMessage("😔");
-        setSeconds(null);
-        tictacAudio?.pause();
-        executeAudio(errorAudio);
+        LaunchModalAndAudio("¡Incorrecto! ¡Inténtalo de nuevo!", "😔", errorAudio);
       }
-      setIsModalOpen(true);
     }
   }
+
+  useEffect(() => {
+    // si ya responde todas las preguntas lanzar el modal de fin de juego
+    const isAllAnswered = questions.every((question) => question.isAnswered);
+    if (!isAllAnswered) return;
+    // saber si todas estan conrrectas
+    const isAllCorrect = questions.every((question) => question.correctAnswer === question.userSelected);
+    if (isAllCorrect) {
+      LaunchModalAndAudio("¡Felicidades! ¡Has terminado el juego!", "🎉🎉🎉", successEndAudio);
+
+      executeAudio(confettiAudio);
+
+      confetti({
+        particleCount: 200,
+        angle: 60,
+        spread: 70,
+        origin: { x: 0, y: 0.9 },
+      });
+      confetti({
+        particleCount: 200,
+        angle: 120,
+        spread: 70,
+        origin: { x: 1, y: 0.9 },
+      });
+    }else{
+      LaunchModalAndAudio("Terminaste el juego, pero hay preguntas mal respondidas", "😓", errorAudio);
+    }
+  }, [questions]);
 
   useEffect(() => {
     const question = questions.find((question) => question.isActive);

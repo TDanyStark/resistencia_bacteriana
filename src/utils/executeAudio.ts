@@ -1,4 +1,4 @@
-const executeAudio = (audio: HTMLAudioElement | null, volume: number = 0.2) => {
+const executeAudio = (audio: HTMLAudioElement | null, volume: number = 0.4) => {
   if (audio) {
     audio.volume = volume;
     audio.currentTime = 0;
