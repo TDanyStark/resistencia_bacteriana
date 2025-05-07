@@ -47,9 +47,9 @@ export const questionnaire: Question[] = [
   {
     id: "5",
     question:
-      "La resistencia bacteriana es una amenaza de salud pública a nivel mundial",
+      "Suministrar un antibiótico sin receta médica a una persona que ya lo ha usado antes es un acto responsable",
     reference: "2",
-    correctAnswer: true,
+    correctAnswer: false,
 
   }
 ];
